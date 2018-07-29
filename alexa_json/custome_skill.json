@@ -28,6 +28,7 @@
                         }
                     ],
                     "samples": [
+                        "チェクアウトをお願い",
                         "{yesno}",
                         "{number}",
                         "支払いをお願い",
@@ -44,6 +45,15 @@
                 {
                     "name": "AMAZON.NoIntent",
                     "samples": []
+                },
+                {
+                    "name": "review",
+                    "slots": [],
+                    "samples": [
+                        "レビュー結果を教えて",
+                        "アンケート結果を教えて",
+                        "今日の結果を教えて"
+                    ]
                 }
             ],
             "types": [

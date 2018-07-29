@@ -1,5 +1,8 @@
 'use strict';
 const Alexa = require('alexa-sdk');
+import QADriver from "./drivers/qa-driver";
+
+const qaDriver = new QADriver();
 
 exports.handler = function(event, context, callback) {
     var alexa = Alexa.handler(event, context);
@@ -9,7 +12,7 @@ exports.handler = function(event, context, callback) {
 
 const handlers = {
     'LaunchRequest': function () {
-        this.emit(":tell", "チェックアウトしますね．この度はご利用ありがとうございました．");
+        this.emit(":tell", "");
     },
     'AMAZON.HelpIntent': function () {
         this.emit(':tell', " つかいかた");
