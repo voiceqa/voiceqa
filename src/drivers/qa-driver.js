@@ -1,7 +1,7 @@
 const DocumentClient = require("aws-sdk").DynamoDB.DocumentClient;
 const uuid = require("uuid").v4;
 
-export class QADriver {
+export default class QADriver {
     constructor() {
         this.db = new DocumentClient();
     }
