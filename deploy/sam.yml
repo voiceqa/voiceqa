@@ -1,0 +1,74 @@
+
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: 'voice qa'
+
+
+Parameters:
+  DynamoDBTableName:
+    Type: String
+
+Resources:
+  AccessPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: AlexaVoiceQAPolicy
+      PolicyDocument:
+        Version: 2012-10-17
+        Statement: 
+          - Effect: Allow
+            Action:
+              - "logs:CreateLogStream"
+              - "logs:PutLogEvents"
+              - "logs:CreateLogGroup"
+            Resource: "arn:aws:logs:*:*:*"
+          - Effect: Allow
+            Action:
+              - "dynamodb:PutItem"
+              - "dynamodb:GetItem"
+              - "dynamodb:Scan"
+              - "dynamodb:UpdateItem"
+            Resource: 
+              - !Sub "arn:aws:dynamodb:*:*:table/${DynamoDBTableName}"
+  AccessRole:
+    Type: AWS::IAM::Role
+    Properties:
+      ManagedPolicyArns: 
+        - !Ref "AccessPolicy"
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: lambda.amazonaws.com
+            Action: "sts:AssumeRole"
+
+  SkillLambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      FunctionName: "alexa-voiceqa_skill"
+      CodeUri: ../src
+      Handler: index.handler
+      Description: ''
+      Runtime: nodejs8.10
+      MemorySize: 128
+      Timeout: 20
+      Role: !GetAtt [ "AccessRole", "Arn" ]
+      Environment:
+        Variables:
+          DYNAMODB: !Ref DynamoDBTableName
+
+  DynamoDBTable:
+    Type: 'AWS::DynamoDB::Table'
+    Properties:
+      AttributeDefinitions:
+      - AttributeName: id
+        AttributeType: S
+      ProvisionedThroughput:
+        WriteCapacityUnits: 1
+        ReadCapacityUnits: 1
+      KeySchema:
+      - 
+        KeyType: HASH
+        AttributeName: id
+      TableName: !Ref DynamoDBTableName
