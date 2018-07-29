@@ -47,7 +47,7 @@ Resources:
     Type: 'AWS::Serverless::Function'
     Properties:
       FunctionName: "alexa-voiceqa_skill"
-      CodeUri: ../src
+      CodeUri: ../artifacts
       Handler: index.handler
       Description: ''
       Runtime: nodejs8.10
@@ -57,6 +57,9 @@ Resources:
       Environment:
         Variables:
           DYNAMODB: !Ref DynamoDBTableName
+      Events:
+        AlexaSkillEvent:
+          Type: AlexaSkill
 
   DynamoDBTable:
     Type: 'AWS::DynamoDB::Table'

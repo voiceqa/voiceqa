@@ -1,4 +1,8 @@
 # vocieqa
 
-## デプロイ
-sh ./deploy/deploy.sh
+## ビルド & デプロイ
+```
+npm install 
+npm run build
+npm run deploy
+```
