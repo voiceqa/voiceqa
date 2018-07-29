@@ -1,0 +1,91 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "チェックアウト",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "checkout",
+                    "slots": [
+                        {
+                            "name": "number",
+                            "type": "AMAZON.NUMBER"
+                        },
+                        {
+                            "name": "yesno",
+                            "type": "yesno"
+                        }
+                    ],
+                    "samples": [
+                        "{yesno}",
+                        "{number}",
+                        "支払いをお願い",
+                        "支払いします",
+                        "チェックアウト",
+                        "チェックアウトします",
+                        "チェックアウトをお願い"
+                    ]
+                },
+                {
+                    "name": "AMAZON.YesIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.NoIntent",
+                    "samples": []
+                }
+            ],
+            "types": [
+                {
+                    "name": "yesno",
+                    "values": [
+                        {
+                            "id": "other",
+                            "name": {
+                                "value": "わかりません",
+                                "synonyms": [
+                                    "わからない",
+                                    "other",
+                                    "どちらでもない"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "no",
+                            "name": {
+                                "value": "no",
+                                "synonyms": [
+                                    "いやです",
+                                    "もう来ません",
+                                    "いいえ"
+                                ]
+                            }
+                        },
+                        {
+                            "id": "yes",
+                            "name": {
+                                "value": "yes",
+                                "synonyms": [
+                                    "また来たいです",
+                                    "また来ます",
+                                    "はい"
+                                ]
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
