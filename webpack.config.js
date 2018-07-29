@@ -4,11 +4,12 @@ const config = {
     mode: 'none',
     target: 'node',
     entry: {
-        "index": "./src/index.js",
+        "customer": "./src/customer.js",
+        "staff": "./src/staff.js",
     },
     output: {
         libraryTarget: "commonjs",
-        filename: "[name].js",
+        filename: "[name]/index.js",
         path: path.join(__dirname, "./artifacts/")
     },
     externals: [
