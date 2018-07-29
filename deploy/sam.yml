@@ -43,11 +43,29 @@ Resources:
               Service: lambda.amazonaws.com
             Action: "sts:AssumeRole"
 
-  SkillLambda:
+  CustomerSkillLambda:
     Type: 'AWS::Serverless::Function'
     Properties:
-      FunctionName: "alexa-voiceqa_skill"
-      CodeUri: ../artifacts
+      FunctionName: "alexa-voiceqa_skill_customer"
+      CodeUri: ../artifacts/customer
+      Handler: index.handler
+      Description: ''
+      Runtime: nodejs8.10
+      MemorySize: 128
+      Timeout: 20
+      Role: !GetAtt [ "AccessRole", "Arn" ]
+      Environment:
+        Variables:
+          DYNAMODB: !Ref DynamoDBTableName
+      Events:
+        AlexaSkillEvent:
+          Type: AlexaSkill
+
+  StaffSkillLambda:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      FunctionName: "alexa-voiceqa_skill_staff"
+      CodeUri: ../artifacts/staff
       Handler: index.handler
       Description: ''
       Runtime: nodejs8.10
